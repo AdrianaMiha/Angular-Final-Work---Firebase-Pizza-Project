@@ -1,0 +1,47 @@
+.delateProduct {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  .delateProduct:before,
+  .delateProduct:after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 2px;
+    margin-left: -7px;
+    background: rgb(95, 95, 95);
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transition: background .250s linear;
+    -o-transition: background .250s linear;
+    transition: background .250s linear;
+    content: '';
+  }
+  
+  .delateProduct:after {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  thead th {
+    cursor: pointer;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+thead th span {
+    visibility: hidden;
+}
+thead th.active {
+    color: #000;
+}
+thead th.active span {
+    visibility: visible;
+}
+
+  

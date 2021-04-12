@@ -1,0 +1,242 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "Title 1",
+      "text": "Some text 1",
+      "date": "2020-11-19T20:39:03.664Z",
+      "author": "Admin"
+    }
+  ],
+  "categories": [
+    {
+      "nameEN": "pizza",
+      "nameUA": "піца",
+      "id": 1
+    },
+    {
+      "nameEN": "salad",
+      "nameUA": "салат",
+      "id": 2
+    },
+    {
+      "nameEN": "drinks",
+      "nameUA": "напої",
+      "id": 3
+    },
+    {
+      "nameEN": "new category",
+      "nameUA": "інше",
+      "id": 4
+    }
+  ],
+  "products": [
+    {
+      "category": {
+        "nameEN": "pizza",
+        "nameUA": "піца",
+        "id": 1
+      },
+      "nameEN": "Pizza",
+      "nameUA": "Піца з ковбасою",
+      "description": "Піца з ковбасою, це, мабуть, найпопулярніший варіант піци. Адже саме такий вид піци можна точно зустріти в усіх піцеріях, цей вид є навіть не в профільних закладах. І як правило, саме таку піцу готують найчастіше вдома. Це не дивно, адже ковбаса це доступний усім продукт, який кожен може придбати в будь-якому магазині. Піца з ковбасою виходить смачною і соковитою, і якщо ви хочете це перевірити, то краще робіть це прямо зараз!",
+      "weight": "350 g",
+      "price": 126,
+      "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Fvchchai.webp?alt=media&token=ece86c75-1fcb-43ac-a0fc-63b961283e96",
+      "count": 1,
+      "id": 1
+    },
+    {
+      "category": {
+        "nameEN": "salad",
+        "nameUA": "салат",
+        "id": 2
+      },
+      "nameEN": "Caesar",
+      "nameUA": "Цезар",
+      "description": "Сала́т «Це́зар» (англ. Caesar salad) — популярний салат, одна з найвідоміших страв північноамериканської кухні. У класичній версії основними складниками салату є пшеничні крутони (грінки), листя салату-ромен і тертий пармезан, заправлені соусом. Основа заправки «Цезар» — свіжі яйця, витримані 1 хвилину в окропі і охолоджені (або яйця в сорочечках). Далі яйця збивають з оливковою олією і приправляють часником, лимонним соком і вустерським соусом. У класичному вигляді салат виходить досить легким, тому до нього часто додають поживніші складові, наприклад, круте яйце або смажену курку.",
+      "weight": "200 g",
+      "price": 155,
+      "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Fsalat-cezar_siteweb-1.jpeg?alt=media&token=03db39f3-a248-42f0-be06-17bb0d7189a6",
+      "count": 1,
+      "id": 2
+    },
+    {
+      "category": {
+        "nameEN": "drinks",
+        "nameUA": "напої",
+        "id": 3
+      },
+      "nameEN": "Bon Aqua",
+      "nameUA": "Бон Аква негазована",
+      "description": "Бонáква (англ. BonAqua) — бутильована вода, вироблена компанією (The Coca-Cola Company).",
+      "weight": "0,5 l",
+      "price": 25,
+      "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Foriginal_1459284418.65971088409424.jpeg?alt=media&token=3f22c20b-5d14-4420-b18a-4189c5e58ec9",
+      "count": 1,
+      "id": 3
+    },
+    {
+      "category": {
+        "nameEN": "new category",
+        "nameUA": "інше",
+        "id": 4
+      },
+      "nameEN": "New Product",
+      "nameUA": "Інше",
+      "description": "Тут може бути новий продукт",
+      "weight": "200 г",
+      "price": 29,
+      "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2F%D0%BB%D1%83%D0%BD%D0%B0-%D0%BD%D0%B0%D0%B4-%D0%BE%D0%B7%D0%B5%D1%80%D0%BE%D0%BC.jpeg?alt=media&token=b8aa63d4-2458-4445-8ca4-3370e25d9454",
+      "count": 1,
+      "id": 4
+    }
+  ],
+  "discounts": [
+    {
+      "title": "Veni, vidi, vici - \"I came; I saw; I conquered\"",
+      "text": "Buy 3 pizzas, get Ceasar Salad for free",
+      "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/discounts%2Fsalat-cezar_siteweb-1.jpeg?alt=media&token=37ff55ed-977d-4df4-afb1-b387c0a03e31",
+      "id": 1
+    },
+    {
+      "title": "discount 2",
+      "text": "water -25%",
+      "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/discounts%2Foriginal_1459284418.65971088409424.jpeg?alt=media&token=3321bffc-73f3-49bc-bbe3-0c1cb8874c44",
+      "id": 2
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "dateOrder": "2020-10-12T16:53:54.340Z",
+      "userName": "Adri",
+      "userPhone": "0985662314",
+      "userCity": "lviv",
+      "userStreet": "ratusha",
+      "userHouse": "43",
+      "orderDetails": [
+        {
+          "category": {
+            "nameEN": "pizza",
+            "nameUA": "піца",
+            "id": 1
+          },
+          "nameEN": "Pizza",
+          "nameUA": "Піца з ковбасою",
+          "description": "Піца з ковбасою, це, мабуть, найпопулярніший варіант піци. Адже саме такий вид піци можна точно зустріти в усіх піцеріях, цей вид є навіть не в профільних закладах. І як правило, саме таку піцу готують найчастіше вдома. Це не дивно, адже ковбаса це доступний усім продукт, який кожен може придбати в будь-якому магазині. Піца з ковбасою виходить смачною і соковитою, і якщо ви хочете це перевірити, то краще робіть це прямо зараз!",
+          "weight": "350 g",
+          "price": 126,
+          "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Fvchchai.webp?alt=media&token=ece86c75-1fcb-43ac-a0fc-63b961283e96",
+          "count": 5,
+          "id": 1
+        }
+      ],
+      "totalPayment": 630,
+      "status": "Скасовано",
+      "userComment": "Poverch 3"
+    },
+    {
+      "id": 2,
+      "dateOrder": "2020-10-12T17:03:12.373Z",
+      "userName": "Taras",
+      "userPhone": "5555",
+      "userCity": "Brody",
+      "userStreet": "Zelena",
+      "userHouse": "22",
+      "orderDetails": [
+        {
+          "category": {
+            "nameEN": "salad",
+            "nameUA": "салат",
+            "id": 2
+          },
+          "nameEN": "Caesar",
+          "nameUA": "Цезар",
+          "description": "Сала́т «Це́зар» (англ. Caesar salad) — популярний салат, одна з найвідоміших страв північноамериканської кухні. У класичній версії основними складниками салату є пшеничні крутони (грінки), листя салату-ромен і тертий пармезан, заправлені соусом. Основа заправки «Цезар» — свіжі яйця, витримані 1 хвилину в окропі і охолоджені (або яйця в сорочечках). Далі яйця збивають з оливковою олією і приправляють часником, лимонним соком і вустерським соусом. У класичному вигляді салат виходить досить легким, тому до нього часто додають поживніші складові, наприклад, круте яйце або смажену курку.",
+          "weight": "200 g",
+          "price": 155,
+          "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Fsalat-cezar_siteweb-1.jpeg?alt=media&token=03db39f3-a248-42f0-be06-17bb0d7189a6",
+          "count": 1,
+          "id": 2
+        },
+        {
+          "category": {
+            "nameEN": "drinks",
+            "nameUA": "напої",
+            "id": 3
+          },
+          "nameEN": "Bon Aqua",
+          "nameUA": "Бон Аква негазована",
+          "description": "Бонáква (англ. BonAqua) — бутильована вода, вироблена компанією (The Coca-Cola Company).",
+          "weight": "0,5 l",
+          "price": 25,
+          "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Foriginal_1459284418.65971088409424.jpeg?alt=media&token=3f22c20b-5d14-4420-b18a-4189c5e58ec9",
+          "count": 1,
+          "id": 3
+        }
+      ],
+      "totalPayment": 180,
+      "status": "Підтверджено",
+      "userComment": ""
+    },
+    {
+      "id": 3,
+      "dateOrder": "2020-11-08T18:47:15.525Z",
+      "userName": "Petro",
+      "userPhone": "0333333333",
+      "userCity": "lviv",
+      "userStreet": "Zelena",
+      "userHouse": "33/12",
+      "orderDetails": [
+        {
+          "category": {
+            "nameEN": "salad",
+            "nameUA": "салат",
+            "id": 2
+          },
+          "nameEN": "Caesar",
+          "nameUA": "Цезар",
+          "description": "Сала́т «Це́зар» (англ. Caesar salad) — популярний салат, одна з найвідоміших страв північноамериканської кухні. У класичній версії основними складниками салату є пшеничні крутони (грінки), листя салату-ромен і тертий пармезан, заправлені соусом. Основа заправки «Цезар» — свіжі яйця, витримані 1 хвилину в окропі і охолоджені (або яйця в сорочечках). Далі яйця збивають з оливковою олією і приправляють часником, лимонним соком і вустерським соусом. У класичному вигляді салат виходить досить легким, тому до нього часто додають поживніші складові, наприклад, круте яйце або смажену курку.",
+          "weight": "200 g",
+          "price": 155,
+          "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Fsalat-cezar_siteweb-1.jpeg?alt=media&token=03db39f3-a248-42f0-be06-17bb0d7189a6",
+          "count": 1,
+          "id": 2
+        }
+      ],
+      "totalPayment": 155,
+      "status": "Виконано",
+      "userComment": "Самовивіз, Оплата готівкою\n       "
+    },
+    {
+      "id": 4,
+      "dateOrder": "2020-11-12T21:52:04.563Z",
+      "userName": "ggg",
+      "userPhone": "0333333333",
+      "userCity": "ffffff",
+      "userStreet": "ffffffff",
+      "userHouse": "66",
+      "orderDetails": [
+        {
+          "category": {
+            "nameEN": "pizza",
+            "nameUA": "піца",
+            "id": 1
+          },
+          "nameEN": "Pizza",
+          "nameUA": "Піца з ковбасою",
+          "description": "Піца з ковбасою, це, мабуть, найпопулярніший варіант піци. Адже саме такий вид піци можна точно зустріти в усіх піцеріях, цей вид є навіть не в профільних закладах. І як правило, саме таку піцу готують найчастіше вдома. Це не дивно, адже ковбаса це доступний усім продукт, який кожен може придбати в будь-якому магазині. Піца з ковбасою виходить смачною і соковитою, і якщо ви хочете це перевірити, то краще робіть це прямо зараз!",
+          "weight": "350 g",
+          "price": 126,
+          "image": "https://firebasestorage.googleapis.com/v0/b/homework19-a00c2.appspot.com/o/images%2Fvchchai.webp?alt=media&token=ece86c75-1fcb-43ac-a0fc-63b961283e96",
+          "count": 1,
+          "id": 1
+        }
+      ],
+      "totalPayment": 126,
+      "status": "В обробці",
+      "userComment": "Заздалегідь, Оплата готівкою\n       "
+    }
+  ]
+}

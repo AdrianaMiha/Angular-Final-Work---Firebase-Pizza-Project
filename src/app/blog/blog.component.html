@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="card col-4" style="border: none;" *ngFor="let d of userBlogs">
+            <img class="card-img-top" style="height: 70%; width: 100%; object-fit: cover;"
+                src="https://20.ua/media-resize/company_large/97558830_559291038106129_7106776768092183477_n.jpg%3F_nc_ht=scontent-frt3-2.cdninstagram-526473.jpeg?timestamp=1590665753"
+                alt="Card image cap">
+            <div class="card-body pb-0">
+                <p class="text-primary">{{ d.date.toDate() | date: shortDate}} {{d.author | uppercase }}</p>
+                <h5 class="card-title">{{ d.title }}</h5>
+                <p class="card-text">{{ d.text }}</p>
+            </div>
+        </div>
+    </div>
+</div>

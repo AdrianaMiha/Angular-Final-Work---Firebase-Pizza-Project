@@ -1,0 +1,18 @@
+<div class="container-fluid mt-2">
+    <div class="row">
+      <div class="col-2 ">
+        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+          <a class="nav-link text-dark" [routerLink]="[ 'orders' ]"  routerLinkActive="active">Orders</a>
+          <a class="nav-link text-dark" [routerLink]="[ 'discounts' ]"  routerLinkActive="active">Discounts</a>
+          <a class="nav-link text-dark" [routerLink]="[ 'category' ]" routerLinkActive="active">Category</a>
+          <a class="nav-link text-dark" [routerLink]="[ 'products' ]" routerLinkActive="active">Products</a>      
+          <a class="nav-link text-dark" [routerLink]="[ 'blogs' ]"  routerLinkActive="active">Blogs</a>
+        </div>
+      </div>
+      <div class="col-10">
+        <div class="tab-content">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>

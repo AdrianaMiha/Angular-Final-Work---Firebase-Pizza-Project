@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="card col-4" style="border: none;" *ngFor="let d of userDiscounts">
+            <img class="card-img-top" style="height: 70%; width: 100%; object-fit: cover;"
+                [src]="d.image"
+                alt="Card image cap">
+            <div class="card-body pb-0">
+                <h5 class="card-title">{{ d.title | titlecase}}</h5>
+                <p class="card-text">{{ d.text | titlecase}}</p>
+                <a class="btn btn-dark" [routerLink]="[ '/discounts', d.id ]">More details</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,134 @@
+<div class="container-fluid border rounded-lg p-0 mr-4">
+
+  <div class="bg-light d-flex justify-content-between p-3 border-bottom ">
+    <span style="font-size: 20px;" class="pl-1">Products</span>
+    <input type="button" class="btn btn-dark rounded col-2" value="Add" (click)="openModal(template)">
+  </div>
+
+  <div class="pt-3 pl-3 pr-3 pb-0">
+    <input type="search" class="col-12 form-control" [(ngModel)]="filter" name="filter" placeholder="Filter Category...">
+  </div>
+    <hr>
+
+ 
+  <table class="table table-bordered ">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col" (click)="IDorder()"> {{ n1 }}</th>
+        <th scope="col">Image</th>
+        <th scope="col" (click)="catorder()">{{ n4 }}</th>
+        <th scope="col" (click)="ENorder()" style="min-width: 120px;"> {{ n2 }}</th>
+        <th scope="col" (click)="UAorder()" style="min-width: 120px;">{{ n3 }}</th>
+        <th scope="col">Description</th>
+        <th scope="col" (click)="weightorder()">{{ n5 }}</th>
+        <th scope="col" style="min-width: 80px;" (click)="priceorder()">{{ n6 }}</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let prod of adminProduct | filterBy: filterArray | orderBy: field: reverse | paginate: { id: '1',
+      itemsPerPage: pageSize, currentPage: currentPage}; let i=index">
+        <td style="width: 60px;">{{ prod.id }}</td>
+        <td class="p-1 text-center" style="width: 80px; height: 55px;">
+          <img [src]="prod.image" alt="" style="width: 80px; height: 55px;">
+        </td>
+        <td>{{ prod.category.nameEN }}</td>
+        <td>{{ prod.nameEN }}</td>
+        <td>{{ prod.nameUA }}</td>
+        <td>{{ prod.description | slice:0:75 }} ...</td>
+        <td>{{ prod.weight }}</td>
+        <td>{{ prod.price }} ₴</td>
+        <td>
+          <input type="button" value="Edit" class="btn btn-dark" (click)="openModal2(template, prod)">
+        </td>
+        <td>
+          <input type="button" value="Delete" class="btn btn-dark" (click)="deleteProduct(deleteCat, prod)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls id="1" (pageChange)="currentPage = $event" maxSize="5"></pagination-controls>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-header p-3 pl-4 pr-4 ">
+    <h4 class="modal-title pull-left" *ngIf="!editStatus"> New Product</h4>
+    <h4 class="modal-title pull-left" *ngIf="editStatus"> Edit Product</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times; </span>
+    </button>
+  </div>
+
+  <form class="ml-3 mr-3 pb-0">
+    <div class="modal-body form-group">
+      <label for="categoryChoose" class="font-weight-light mb-2"> Category:</label>
+      <select class="form-control" [(ngModel)]="categoryName" name="categoryName" (change)="setCategory()"
+        id="categoryChoose">
+        <option *ngFor="let category of categories">
+          {{ category.nameEN }}
+        </option>
+      </select>
+
+      <div class="form-group mt-2">
+        <label for="productNameEN" class="mt-2 mb-2 font-weight-light"> Name:</label>
+        <input type="text" class="form-control" id="productNameEN" [(ngModel)]="productNameEN" name="productNameEN"
+          placeholder="Name EN here...">
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="productNameUA" [(ngModel)]="productNameUA" name="productNameUA"
+          placeholder="Name UA here...">
+      </div>
+      <div class="form-group">
+        <label for="productDescription" class="mt-2 font-weight-light mb-2"> Details:</label>
+        <textarea [(ngModel)]="productDescription" name="productDescription" id="productDescription"
+          class="form-control" rows="2" style="resize: none;" placeholder="Describe your product..."></textarea>
+      </div>
+      <div class="form-group">
+        <input type="text" class="form-control" id="productWeight" [(ngModel)]="productWeight" name="productWeight"
+          placeholder="Weight...">
+      </div>
+      <div class="form-group">
+        <input type="number" class="form-control" id="productPrice" [(ngModel)]="productPrice" name="productPrice"
+          placeholder="Price...">
+      </div>
+
+      <div class="custom-file mb-3" style="overflow: hidden;" *ngIf="!imageStatus">
+        <input (change)="uploadFile($event)" type="file" class="custom-file-input" id="productImage" required>
+        <label class="custom-file-label" style="width: 105.5%;" for="productImage">Image...</label>
+      </div>
+
+      <div class="progress mb-3" *ngIf="!imageStatus">
+        <div class="progress-bar progress-bar-striped bg-dark" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+          [style.width]="(uploadProgress | async) + '%'"></div>
+      </div>
+
+      <div class="image mb-3 d-flex flex-row align-items-start" *ngIf="imageStatus"
+        style="width: 100px; height: 100px;">
+        <img [src]="productImage" alt="" style="width: 100%; height: 100%;">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="deleteImg()">
+          <span class="ml-2" aria-hidden="true">&times; </span>
+        </button>
+      </div>
+      <div class="modal-footer d-flex justify-content-end p-0 pt-3">
+        <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Close</button>
+        <button *ngIf="!editStatus" class="btn btn-secondary" (click)="addProduct()"
+          [disabled]="productNameEN && productCategory && productNameUA && productDescription && productWeight && productPrice && productImage  ? false : true">Add</button>
+        <button *ngIf="editStatus" class="btn btn-secondary" (click)="editProd()"
+          [disabled]="!productNameEN || !categoryName || !productNameUA || !productDescription || !productWeight || !productPrice || !productImage  ? true : false">Save</button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+
+<ng-template #deleteCat>
+  <form>
+    <div class="modal-body p-0 pt-1 pb-2 d-flex justify-content-around align-items-center">
+      <button type="button" class="btn-lg btn-dark mt-2" (click)="modalRef.hide()">Dismiss</button>
+      <button type="button" class="btn-lg btn-danger mt-2" (click)="checkDel()">Delete</button>
+    </div>
+  </form>
+</ng-template>

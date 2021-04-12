@@ -1,0 +1,29 @@
+<div class="container mt-2">
+    <div class="row">
+      <div class="col-md-12 col-lg-l2">
+        <div class="emptySpace20"></div>
+        <ul class="breadcrumb smallSlideLeft">
+            <li>
+                <a [routerLink]="[ '/home' ]">
+                    <span>Головна >> </span>
+                </a>
+            </li>
+            <li>
+                <a [routerLink]="[ '/discounts' ]"><span> Discounts >>  </span></a>
+            </li>
+            <li>
+                <a><span> {{ discount?.title | titlecase }}</span></a>
+            </li>
+        </ul>
+    </div>
+      <div class="card col-6 m-auto">
+        <img class="card-img-top" [src]="discount?.image" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ discount?.title | titlecase}}</h5>
+          <p class="card-text">{{ discount?.text | titlecase}}</p>
+          <a class="btn btn-light" (click)="goBack()">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  

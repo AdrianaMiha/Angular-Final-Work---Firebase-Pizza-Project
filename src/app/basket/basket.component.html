@@ -1,0 +1,159 @@
+<div class="container-fluid pr-5 pl-5" style="text-align: center; margin-top: 19%;" *ngIf="!order.length">
+    <p>Кошик пустий</p>
+    <a class="text-danger" [routerLink]="[ '/menu/pizza' ]">Замовити піцу</a>
+</div>
+
+
+<div class="container-fluid pr-5 pl-5" *ngIf="order.length">
+    <div class="row">
+        <div class="col-md-12 mt-5 pl-5 mb-5">
+            <div class="sectionTitle fadeInTop hidden-xs">
+                <h1 class="h1 as">Оформити замовлення</h1>
+            </div>
+        </div>
+    </div>
+    <form id="make-order-form" #orderForm="ngForm" novalidate (ngSubmit)="addOrder(orderForm)">
+        <div class="d-flex flex-row justify-content-between pl-5">
+            <div style="width: 46%;">
+                <h6>Оберіть спосіб доставки</h6>
+                <div class="input-group d-flex flex-column">
+                    <div class="deliveryCheckboxs mt-4 mb-3">
+                        <label class="checkboxEntry radio">
+                            <input type="radio" name="delivery" value="Доставка" checked="checked"
+                                [(ngModel)]="delivery" required><span>Доставка</span>
+                        </label>
+                        <label class="checkboxEntry radio ml-3">
+                            <input type="radio" name="delivery" value="Самовивіз" [(ngModel)]="delivery"
+                                required><span>Самовивіз</span>
+                        </label>
+                        <label class="checkboxEntry radio ml-3">
+                            <input type="radio" name="delivery" value="Заздалегідь" [(ngModel)]="delivery"
+                                required><span>Заздалегідь</span>
+                        </label>
+                    </div>
+                    <div class="emptySpace20"></div>
+                    <div class="inputElementWrapper">
+                        <input class="inputElementItem" type="text" placeholder="Ваше імя" required
+                            pattern="[a-zA-Z]{2,}" #name="ngModel" [(ngModel)]="userName" name="userName">
+                        <label>Ваше імя*</label>
+                        <span class="focus-border"><i></i></span>
+                        <div [hidden]="name.valid || name.untouched" class="text-danger ml-1">
+                            Вкажіть ім'я
+                        </div>
+                    </div>
+                    <div class="emptySpace20"></div>
+                    <div class="inputElementWrapper">
+                        <input class="inputElementItem" type="text" placeholder="Телефон" required #phone="ngModel"
+                            [(ngModel)]="userPhone" name="userPhone" prefix="+38 (0" mask="00) 000 - 0000"
+                            [showMaskTyped]="true">
+                        <label>Телефон*</label>
+                        <span class="focus-border"><i></i></span>
+                        <div [hidden]="phone.valid || phone.untouched" class="text-danger ml-1">
+                            Вкажіть номер телефону
+                        </div>
+                    </div>
+                    <div class="emptySpace20"></div>
+
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="inputElementWrapper" style="width: 24%;">
+                            <input class="inputElementItem" type="text" placeholder="Місто" required #city="ngModel"
+                                [(ngModel)]="userCity" name="userCity" pattern="[a-zA-Z]{2,}">
+                            <label>Місто*</label>
+                            <span class="focus-border"><i></i></span>
+                            <div [hidden]="city.valid || city.untouched" class="text-danger ml-1">
+                                Вкажіть місто
+                            </div>
+                        </div>
+                        <div class="emptySpace20"></div>
+                        <div class="inputElementWrapper" style="width: 53%;">
+                            <input class="inputElementItem" type="text" placeholder="Вулиця" required #street="ngModel"
+                                [(ngModel)]="userStreet" name="userStreet" pattern="[a-zA-Z]{2,}">
+                            <label>Вулиця*</label>
+                            <span class="focus-border"><i></i></span>
+                            <div [hidden]="street.valid || street.untouched" class="text-danger ml-1">
+                                Вкажіть вулицю
+                            </div>
+                        </div>
+                        <div class="emptySpace20"></div>
+                        <div class="inputElementWrapper" style="width: 19%;">
+                            <input class="inputElementItem" type="text" placeholder="Будинок" required #house="ngModel"
+                                [(ngModel)]="userHouse" name="userHouse">
+                            <label>Будинок*</label>
+                            <span class="focus-border"><i></i></span>
+                            <div [hidden]="house.valid || house.untouched" class="text-danger ml-1">
+                                Вкажіть номер будинку
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="emptySpace20"></div>
+                    <div class="inputElementWrapper">
+                        <textarea class="textareaElementItem" maxlength="256" cols="20" rows="4"
+                            placeholder="Ваш коментар" ngModel name="userComment"></textarea>
+                        <label>Ваш коментар</label>
+                        <span class="focus-border"><i></i></span>
+                    </div>
+
+                    <p><iframe style="border: 0;margin-top: 15px; width: 100%; height: 340px;"
+                            src="https://maps.google.com/maps?width=600&amp;height=340&amp;hl=en&amp;q=%D0%BB%D1%8C%D0%B2%D0%BE%D0%B2+(%D0%9D%D0%B0%D0%B7%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)&amp;ie=UTF8&amp;t=&amp;z=11&amp;iwloc=B&amp;output=embed"
+                            frameborder="0"></iframe></p>
+
+                </div>
+            </div>
+
+            <div style="width: 51%;" class="pr-5">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Товар</th>
+                            <th scope="col">Ціна</th>
+                            <th scope="col">Кількість</th>
+                            <th scope="col">Загалом</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let o of order; index as i">
+                            <td style="vertical-align: middle;">
+                                <div class="delateProduct remove-cart-product-popup open-popup"
+                                    (click)="deleteProduct(order)">
+                                </div>
+                            <td>
+                                <img [src]="o.image" alt="" style="width: 90px;height: 90px; margin-right: 5px;">
+                                <span> {{ o?.nameUA }} </span>
+                            </td>
+                            <td style="vertical-align: middle;">{{ o?.price }} грн</td>
+                            <td style="vertical-align: middle;">
+
+                                <app-product-count [product]="o" (click)="checkBasket()"></app-product-count>
+                            </td>
+                            <td style="vertical-align: middle;">{{ o?.price * o?.count }} грн</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"></td>
+                            <td>Знижка: <span style="font-size: 20px; " class="text-danger"> 0 грн </span></td>
+                            <td>Загалом: <span style="font-size: 20px; font-weight: bold;" class="text-danger">{{
+                                    totalPrice }} грн </span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="deliveryCheckboxs mt-4 mb-3">
+                    <label class="checkboxEntry radio">
+                        <input type="radio" name="cash" value="Оплата готівкою" required [checked]="checked"
+                            [(ngModel)]="payment"><span>Оплата готівкою</span>
+                    </label>
+                    <label class="checkboxEntry radio ml-3">
+                        <input type="radio" name="cash" value="Безготівкова оплата" required
+                            [(ngModel)]="payment"><span>Безготівкова оплата</span>
+                    </label>
+                </div>
+                <div class="emptySpace20"></div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <button type="submit" class="btn btn-warning" style="border-radius: 10%; "
+                        [disabled]="orderForm.invalid">ОФОРМИТИ
+                        ЗАМОВЛЕННЯ</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

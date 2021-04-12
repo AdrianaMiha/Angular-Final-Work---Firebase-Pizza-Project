@@ -1,0 +1,63 @@
+<div class="border rounded-lg p-0">
+    <div class="bg-light d-flex justify-content-between p-3 border-bottom ">
+        <span style="font-size: 20px;" class="pl-1">Category</span>
+        <input type="button" class="btn btn-dark rounded col-2" value="Add" (click)="openModal(template)">
+    </div>
+    <div class="pt-3 pl-3 pr-3 pb-0">
+        <input type="search" class="col-12 form-control" [(ngModel)]="filter" name="filter"
+            placeholder="Filter Category...">
+    </div>
+    <hr>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" style="width: 60px" (click)="IDorder()"> {{ n1 }}</th>
+                <th scope="col" style="width: 40%" (click)="ENorder()"> {{ n2 }}</th>
+                <th scope="col" style="width: 40%" (click)="UAorder()">{{ n3 }}</th>
+                <th scope="col" style="width: 120px">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of adminCategory | filterBy: filterArray | orderBy: field: reverse ; let i=index">
+                <td>{{ c.id }}</td>
+                <td>{{ c.nameEN | titlecase }}</td>
+                <td>{{ c.nameUA | titlecase  }}</td>
+                <td>
+                    <input type="button" value="Delete" class="btn btn-dark" (click)="deleteCategory(deleteCat, c)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Category model</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body d-flex justify-content-between form-group">
+            <input [(ngModel)]="nameEN" name="nameEN" type="text" class="form-control col-6 mr-1" id="nameEN"
+                placeholder="Name EN here...">
+
+            <input type="text" [(ngModel)]="nameUA" name="nameUA" id="nameUA" class="form-control col-6 "
+                placeholder="Name UA here...">
+        </div>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary mt-2" (click)="modalRef.hide()">Close</button>
+            <button type="button" class="btn btn-secondary mt-2" (click)="addCategory()"
+                [disabled]="nameEN && nameUA ? false : true">Add</button>
+        </div>
+    </form>
+</ng-template>
+
+<ng-template #deleteCat>
+    <form>
+        <div class="modal-body p-0 pt-1 pb-2 d-flex justify-content-around align-items-center">
+            <button type="button" class="btn-lg btn-dark mt-2" (click)="modalRef.hide()">Dismiss</button>
+            <button type="button" class="btn-lg btn-danger mt-2" (click)="checkDel()">Delete</button>
+        </div>
+    </form>
+</ng-template>

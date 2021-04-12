@@ -1,0 +1,110 @@
+<div class="border rounded-lg p-0">
+    <div class="bg-light d-flex justify-content-between p-3 border-bottom ">
+        <span style="font-size: 20px;" class="pl-1 mb-2">Orders</span>
+    </div>
+    <div class="pt-3 pl-3 pr-3 pb-0">
+        <input type="search" class="col-12 form-control" [(ngModel)]="filter" name="filter"
+            placeholder="Filter Orders...">
+    </div>
+    <hr>
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th [class.active]="order === 'id'" (click)="setOrder('id')">
+                    №
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'dateOrder'" (click)="setOrder('dateOrder')">
+                    Date
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'orderDetails'" (click)="setOrder('orderDetails')">
+                    Order
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'userName'" (click)="setOrder('userName')">
+                    Customer
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'userCity'" (click)="setOrder('userCity')">
+                    Adress
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'userComment'" (click)="setOrder('userComment')">
+                    Details
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'totalPayment'" (click)="setOrder('totalPayment')">
+                    Total
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th [class.active]="order === 'status'" (click)="setOrder('status')">
+                    Status
+                    <span [hidden]="reverse">▼</span>
+                    <span [hidden]="!reverse">▲</span>
+                </th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let o of orders | search: filter | orderBy: order:!reverse:'case-insensitive' | paginate: { id: '1',
+            itemsPerPage: pageSize, currentPage: currentPage}; let i=index"
+                [ngClass]="{'table-warning' : o.status === 'Підтверджено', 'table-success' : o.status === 'Виконано', 'table-secondary' : o.status === 'Скасовано'}">
+                <td style="min-width: 65px ;">{{ o.id }}</td>
+                <td>{{ o.dateOrder.toDate() | date:"dd.MM.yyyy - HH:mm" }}
+                    <div *ngIf="o.status === 'Підтверджено' || o.status === 'В обробці'">
+                        <p *ngIf="!timerFunc(o.dateOrder)" style="color: rgb(155, 12, 12);">Time is up :(</p>
+                        <countdown-timer *ngIf="timerFunc(o.dateOrder)" [countDownTimerConfig]="testConfig"
+                            style="color: red;"></countdown-timer>
+                    </div>
+                </td>
+                <td>
+                    <div *ngFor="let od of o.orderDetails">
+                        {{ od.count}} шт. - {{ od.nameUA | titlecase }}
+                    </div>
+                </td>
+                <td>{{ o.userName | titlecase }}, {{ o.userPhone }}</td>
+                <td>{{ o.userCity | titlecase }}, {{ o.userStreet | titlecase }},
+                    {{ o.userHouse}}</td>
+                <td>{{ o.userComment | titlecase }}</td>
+                <td style="min-width: 85px ;">{{ o.totalPayment}} грн</td>
+                <td>{{ o.status}}</td>
+                <td>
+                    <input type="button" value="Edit" class="btn btn-dark" (click)="openModal2(template, o)">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination-controls id="1" (pageChange)="currentPage = $event" maxSize="5"></pagination-controls>
+</div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Edit Order</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form>
+        <div class="modal-body form-group">
+            <label for="statusChoose" class="font-weight-light mb-2"> Status:</label>
+            <select class="form-control" [(ngModel)]="statusName" name="statusName" id="statusChoose">
+                <option *ngFor="let status of statuses">
+                    {{ status }}
+                </option>
+            </select>
+        </div>
+        <div class="modal-footer d-flex justify-content-end">
+            <button type="button" class="btn btn-secondary mt-2" (click)="modalRef.hide()">Close</button>
+            <button type="button" class="btn btn-secondary mt-2" (click)="editOrder()"
+                [disabled]="statusName ? false : true">Save</button>
+        </div>
+    </form>
+</ng-template>

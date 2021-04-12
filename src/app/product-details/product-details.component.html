@@ -1,0 +1,97 @@
+<div class="section animateSection animated">
+    <div class="container hidden-xs hidde-sm">
+        <div class="row">
+            <div class="col-md-12 col-lg-l2">
+                <div class="emptySpace20"></div>
+                <ul class="breadcrumb smallSlideLeft">
+                    <li>
+                        <a [routerLink]="[ '/home' ]">
+                            <span>Головна >> </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="[ '/menu', product?.category.nameEN ]"><span>
+                                {{ product?.category.nameUA | titlecase }} >> </span></a>
+                    </li>
+                    <li>
+                        <a><span> {{ product?.nameUA | titlecase }}</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <div class="row ">
+            <div class="col-lg-12">
+                <div class="productDetailFlex d-flex flex-row">
+                    <div class="swiperMainWrapper mobileFluidSwiper buttonPosition-2 mr-5">
+                        <div class="swiper-container swiper-swiper-unique-id-0 initialized swiper-container-horizontal">
+                            <div class="swiper-wrapper d-flex justify-content-center">
+                                <div class="swiper-slide swiper-slide-active " style="width: 520px;">
+                                    <div class="imgWrapper">
+                                        <div class="productDetail ">
+                                            <img class="productDetail" style="width: 100%;" [src]="product?.image">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="emptySpace-md45 emptySpace-xs20"></div>
+                    </div>
+                    <div class="productDetailContent">
+                        <div class="productOderDetail smallSlideLeft">
+                            <h1 class="h2 as">{{ product?.nameUA }}</h1>
+                            <p class="text-justify">{{ product?.description }}</p>
+                            <div class="d-flex flex-column">
+                                <div class="productSize d-flex flex-row" *ngIf="product?.category.nameEN == 'pizza'">
+                                    <div class="imgWrapper">
+                                        <img style="width: 15px;height: 15px;"
+                                            src="https://www.lapiec-pizza.com.ua/wp-content/themes/lapiec/fonts/svg-icons/size.svg"
+                                            alt="size">
+                                    </div>
+                                    <p> Розмір:</p><span class="font-weight-bold"> 30 см</span>
+                                </div>
+                                <div class="productSize d-flex flex-row">
+                                    <div class="imgWrapper">
+                                        <img style="width: 15px;height: 15px;"
+                                            src="https://www.lapiec-pizza.com.ua/wp-content/themes/lapiec/fonts/svg-icons/weight.svg"
+                                            alt="weight">
+                                    </div>
+                                    <ng-container *ngIf="product?.category.nameEN !== 'drinks'; else elseTemplate">
+                                        <p> Вага:</p>
+                                    </ng-container>
+                                    <ng-template #elseTemplate>
+                                        <p>Об'єм:</p>
+                                    </ng-template>
+                                    <span class="totalWeight font-weight-bold"> {{ product?.weight }} </span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="emptySpace30 emptySpace-xs25"></div>
+                        <div class="orderPrizeSection productOrder">
+                            <div class="orderDetailSection smallSlideLeft animationDelay-4">
+                                <p class="counterTitle">Кількість: </p>
+                                <app-product-count [product]="product"></app-product-count>
+                            </div>
+                            <div class="emptySpace30 emptySpace-xs25"></div>
+                            <div class="orderDetailSection smallSlideLeft animationDelay-5">
+                                <div class="productPrice d-flex flex-row">
+                                    <p>Загалом:</p>
+                                    <span class="productDetailPrice font-weight-bold">{{ product?.price *
+                                        product?.count}}
+                                        грн</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="emptySpace25 emptySpace-xs5"></div>
+                        <div class="fadeInTop animationDelay-6">
+                            <div class="button addToCart update-cart-product-single" (click)="addBasket(product)">
+                                ЗАМОВИТИ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

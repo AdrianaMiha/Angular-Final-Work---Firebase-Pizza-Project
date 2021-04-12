@@ -1,0 +1,115 @@
+<div class="container-fluid ">
+    <div class="row">
+        <div class="col-md-12 mt-4">
+            <div class="sectionTitle fadeInTop hidden-xs">
+                <h1 class="h1 as">Особистий кабінет</h1>
+                <div class="emptySpace60 emptySpace-lt40 emptySpace-md30"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between pr-5 pl-5">
+        <div style="width: 37%;">
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div class="sectionTitle fadeInTop hidden-xs">
+                        <span class="h6 as">Персональні дані</span>
+                        <div class="emptySpace60 emptySpace-lt40 emptySpace-md30"></div>
+                    </div>
+                </div>
+            </div>
+
+            <form id="make-order-form" #profileForm="ngForm" novalidate (ngSubmit)="saveProfile(profileForm)">
+                <div class="inputElementWrapper">
+                    <input class="inputElementItem" type="text" placeholder="Ваше імя" required pattern="[a-zA-Z]{2,}"
+                        #name="ngModel" [(ngModel)]="userName" name="userName">
+                    <label>Ваше ім'я</label>
+                    <span class="focus-border"><i></i></span>
+                    <div [hidden]="name.valid || name.untouched" class="text-danger ml-1">
+                        Вкажіть ім'я
+                    </div>
+                </div>
+                <div class="emptySpace20"></div>
+                <div class="inputElementWrapper">
+                    <input class="inputElementItem" type="text" readonly placeholder="Телефон" [(ngModel)]="phoneNumber" name="phoneNumber"
+                        prefix="+38 (" mask="000) 000 - 0000" [showMaskTyped]="true">
+                        <label>Телефон</label>
+                    <span class="focus-border"><i></i></span>
+                </div>
+                <div class="emptySpace20"></div>
+
+                <div class="d-flex flex-row justify-content-between">
+                    <div class="inputElementWrapper" style="width: 24%;">
+                        <input class="inputElementItem" type="text" placeholder="Місто" [(ngModel)]="userCity"
+                            name="userCity">
+                        <label>Місто</label>
+                        <span class="focus-border"><i></i></span>
+                    </div>
+                    <div class="emptySpace20"></div>
+                    <div class="inputElementWrapper" style="width: 53%;">
+                        <input class="inputElementItem" type="text" placeholder="Вулиця" [(ngModel)]="userStreet"
+                            name="userStreet">
+                        <label>Вулиця</label>
+                        <span class="focus-border"><i></i></span>
+                    </div>
+                    <div class="emptySpace20"></div>
+                    <div class="inputElementWrapper" style="width: 19%;">
+                        <input class="inputElementItem" type="text" placeholder="Будинок" [(ngModel)]="userHouse"
+                            name="userHouse">
+                        <label>Будинок</label>
+                        <span class="focus-border"><i></i></span>
+                    </div>
+                </div>
+                <div class="emptySpace20"></div>
+                <button type="submit" class="btn btn-warning" style="border-radius: 10%; "
+                    [disabled]="profileForm.invalid || profileForm.pristine">Зберегти</button>
+            </form>
+        </div>
+
+
+        <div style="width: 60%;">
+            <div class="row">
+                <div class="col-md-12 mt-4">
+                    <div class="sectionTitle fadeInTop hidden-xs">
+                        <span class="h6 as">Історія замовлень</span>
+                        <div class="emptySpace60 emptySpace-lt40 emptySpace-md30"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;" *ngIf="!userOrders.length">
+                <p>У Вас немає замовлень</p>
+                <a class="text-danger" [routerLink]="[ '/menu/pizza' ]">Замовити піцу</a>
+            </div>
+
+            <table *ngIf="userOrders.length" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Date</th>
+                        <th>Order</th>
+                        <th>Adress</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let o of userOrders; let i=index">
+                        <td>{{ i+1 }}</td>
+                        <td>{{ o.dateOrder.toDate() | date:"HH:mm  dd/MM/yyyy" }}
+                        </td>
+                        <td>
+                            <div *ngFor="let od of o.orderDetails">
+                                {{ od.count}} шт. - {{ od.nameUA | titlecase  }}
+                            </div>
+                        </td>
+                        <td>{{ o.userCity | titlecase }}, {{ o.userStreet | titlecase }},
+                            {{ o.userHouse}}</td>
+                        <td>{{ o.totalPayment}} грн</td>
+                        <td>{{ o.status}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

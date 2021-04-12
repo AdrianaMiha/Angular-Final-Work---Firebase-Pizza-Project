@@ -1,0 +1,45 @@
+<form class="form-inline">
+    <div class="form-group col-12">
+        <input type="search" class="form-control w-100 mt-1" id="title" placeholder="Title here.." [(ngModel)]="title"
+            name="title">
+        <input type="search" class="form-control w-100 mt-3" id="text" placeholder="Text here.." [(ngModel)]="text"
+            name="text">
+        <input type="search" class="form-control w-100 mt-3" id="author" placeholder="Author here.."
+            [(ngModel)]="author" name="author">
+        <button *ngIf="!editStatus" type="button" class="btn btn-dark col-1 mt-3" (click)="addBlog()">Add</button>
+        <button *ngIf="editStatus" type="button" class="btn btn-light col-1 mt-3" (click)="addBlog()">Save</button>
+        </div>
+
+    <h6 class="text-danger mt-3 mb-0 ml-3">{{message}}</h6>
+
+</form>
+<hr>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Text</th>
+            <th scope="col">Date</th>
+            <th scope="col">Author</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let d of adminBlogs; let i=index">
+            <td >{{ i+1 }}</td>
+            <td>{{ d.title }}</td>
+            <td>{{ d.text }}</td>
+            <td>{{ d.date.toDate() | date:"MMMM dd, yyyy, HH:mm"}}</td>
+
+            <td>{{ d.author }}</td>
+            <td>
+                <input type="button" value="Edit" class="btn btn-dark" (click)="editBlog(d)">
+            </td>
+            <td>
+                <input type="button" value="Delete" class="btn btn-dark" (click)="deleteBlog(d)">
+            </td>
+        </tr>
+    </tbody>
+</table>
